@@ -1,0 +1,325 @@
+:root {
+  --eclipse: #0F0F47;
+  --twilight: #272757;
+  --storm: #8686AC;
+  --shadow: #505081;
+  --hover-glow: #3e3e7d;
+}
+
+.alias-section {
+  background-color: var(--eclipse);
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  padding: 4rem 2rem;
+}
+
+.alias-title {
+  font-size: 2rem;
+  color: var(--storm);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.alias-subtitle {
+  font-size: 1.5rem;
+  color: var(--hover-glow);
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.prizes-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #0b0c3e; /* Dark background (edit to match your theme) */
+}
+
+.prizes-title {
+  font-size: 2.5rem;
+  color: #bfb8ad; /* Use your app color scheme */
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.prizes-subtitle {
+  font-size: 1.2rem;
+  color: #998888;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 2rem;
+}
+
+.prize-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.prize-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.prize-card {
+  border: 2px solid white;
+  border-radius: 16px;
+  padding: 1rem;
+  background-color: var(--twilight);
+  width: 180px;
+  text-align: center;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.prize-card:hover {
+  transform: translateY(-5px);
+}
+
+.prize-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.prize-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--storm);
+}
+
+.prize-amount {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--storm);
+}
+
+/* Highlight for special prize */
+.special-prize {
+  background-color: #ffe100;
+  color: #000;
+  border: 2px solid #000;
+}
+
+.special-prize .prize-label,
+.special-prize .prize-amount {
+  color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .prize-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .prizes-section {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+}
+
+/* RULES SECTION */
+.rules-section {
+  background-color: #fff;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.rules-button-container {
+  margin-top: 2rem;
+}
+
+.rules-button {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 20px;
+  border: 2px solid var(--eclipse);
+  background-color: var(--eclipse);
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.rules-button:hover {
+  background-color: var(--shadow);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .prize-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .prize-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prize-card {
+    max-width: 90%;
+  }
+}
+
+/* Sponsors section wrapper */
+.sponsors-section {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: #0b0c3e;
+}
+
+/* Title already ok */
+
+/* Carousel */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 360px;    /* adjust as you like */
+  height: 200px;       /* give fixed height so FAQ won’t shift up */
+  margin: 0 auto 3rem; /* 3rem gap below carousel */
+  overflow: hidden;    /* keep images inside */
+}
+
+.carousel-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  max-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: contain; /* keep aspect-ratio */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-image.visible {
+  opacity: 1;
+}
+
+
+/* FAQ */
+/* FAQ section */
+.faq-section {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+/* grid layout */
+/* ---------- Layout ---------- */
+.faq-grid {
+  /* switch from grid --> flex */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.faq-card {
+  width: calc(33.333% - 1.5rem);   /* 3-per-row desktop */
+  background: #1a1b4c;
+  border: 1px solid #505081;
+  border-radius: 12px;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: transform .25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* collapse answer when closed */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
+}
+
+/* open state */
+.faq-card.open .faq-answer {
+  max-height: 600px;        /* plenty to show text */
+}
+
+.faq-card:hover {
+  transform: translateY(-4px);
+}
+
+/* responsive break-points */
+@media (max-width: 900px) {
+  .faq-card { width: calc(50% - 1.5rem); }   /* 2 per row */
+}
+
+@media (max-width: 600px) {
+  .faq-card { width: 100%; }                 /* 1 per row */
+}
+
+
+/* Team Cards */
+.team-section {
+  background-color: var(--background);
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-light);
+  font-family: 'Obtrion', serif;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--accent-glow);
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+.team-column {
+  flex: 1 1 200px;
+  max-width: 300px;
+  margin: 1rem;
+}
+
+.group-title {
+  font-size: 1.5rem;
+  color: var(--accent-glow);
+  margin-bottom: 1rem;
+  text-decoration: underline;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  text-align: left;
+}
+
+li {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.student-grid ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+}
+
+.student-grid li {
+  margin: 1rem 2rem;
+  text-align: center;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .alias-title {
+    font-size: 1.5rem;
+  }
+}

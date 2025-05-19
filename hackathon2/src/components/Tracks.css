@@ -1,0 +1,113 @@
+:root {
+  --eclipse: #0F0F47;
+  --twilight: #272757;
+  --storm: #8686AC;
+  --shadow: #505081;
+  --hover-glow: #3e3e7d;
+}
+
+.tracks-section {
+  background-color: var(--eclipse);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.tracks-title {
+  font-size: 2.5rem;
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 2rem;
+}
+
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.track-card {
+  position: relative;
+  height: 200px; /* Ensures card has visible height */
+  background-color: var(--twilight);
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+}
+
+.card-image {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(1.4) contrast(1.2);
+  z-index: 0;
+}
+.track-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px var(--hover-glow), 0 0 15px var(--storm);
+}
+
+/* Overlay to darken image slightly for text readability */
+.track-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.5));
+  z-index: 1;
+}
+.track-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+}
+
+.track-card:hover::after {
+  opacity: 1;
+}
+
+.card-text {
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 1rem;
+  z-index: 2;
+  text-shadow: 1px 1px 2px black;
+}
+
+
+/* Responsive Grid */
+@media (max-width: 1024px) {
+  .track-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .track-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tracks-title {
+    font-size: 2rem;
+  }
+
+  .card-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .track-grid {
+    grid-template-columns: 1fr;
+  }
+}

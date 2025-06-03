@@ -1,15 +1,8 @@
 {
-  "version": 2,
   "builds": [
-    {
-      "src": "hackathon_backend/api/index.js",
-      "use": "@vercel/node"
-    }
+    { "src": "hackathon_backend/api/index.js", "use": "@vercel/node" }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "hackathon_backend/api/index.js"
-    }
+    { "src": "/api/(.*)", "dest": "hackathon_backend/api/index.js" }
   ]
 }

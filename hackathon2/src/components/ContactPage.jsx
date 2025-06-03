@@ -17,23 +17,24 @@ const ContactPage = () => {
     return errs;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const errs = validate();
-    setErrors(errs);
-    if (Object.keys(errs).length === 0) {
-      const mailtoLink = `mailto:pscmrhackathon2k25@gmail.com?subject=Hackathon%20Contact%20From%20${encodeURIComponent(
-        formData.name
-      )}&body=Name: ${encodeURIComponent(formData.name)}%0AEmail: ${encodeURIComponent(
-        formData.email
-      )}%0APhone: ${encodeURIComponent(formData.phone)}%0AMessage: ${encodeURIComponent(
-        formData.message
-      )}`;
-      window.location.href = mailtoLink;
-      setSent(true);
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    }
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const errs = validate();
+  setErrors(errs);
+  if (Object.keys(errs).length === 0) {
+    const subject = `Hackathon Contact From ${encodeURIComponent(formData.name)}`;
+    const body = `Name: ${encodeURIComponent(formData.name)}%0AEmail: ${encodeURIComponent(
+      formData.email
+    )}%0APhone: ${encodeURIComponent(formData.phone)}%0AMessage: ${encodeURIComponent(formData.message)}`;
+
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=pscmrhackathon2k25@gmail.com&su=${subject}&body=${body}`;
+
+    window.open(gmailLink, "_blank"); // open in new tab
+    setSent(true);
+    setFormData({ name: "", email: "", phone: "", message: "" });
+  }
+};
+
 
   return (
     <div className="contact-container">
@@ -90,18 +91,68 @@ const ContactPage = () => {
         </div>
       </motion.div>
 
-      <motion.div className="social-icons" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-        <a href="https://wa.me/0000000000" target="_blank" rel="noreferrer"><FaWhatsapp /></a>
-        <a href="https://www.instagram.com/pscmrcet_csedatascience/" target="_blank" rel="noreferrer"><FaInstagram /></a>
-        <a href="https://www.linkedin.com/in/cse-datascience-pscmrcet-4a8514333?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noreferrer"><FaLinkedin /></a>
+     <div className="mt-12 px-4 w-full flex flex-col items-center text-white font-orbitron">
+      {/* Social Icons */}
+      <motion.div
+        className="social-icons mb-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        <a
+          href="https://www.instagram.com/pscmrcet_csedatascience/"
+          target="_blank"
+          rel="noreferrer"
+          className="text-pink-500 hover:text-[#d1c4f7] transition-transform transform hover:scale-125"
+        >
+          <FaInstagram size={30} />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/cse-datascience-pscmrcet-4a8514333?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+          target="_blank"
+          rel="noreferrer"
+          className="text-blue-400 hover:text-[#d1c4f7] transition-transform transform hover:scale-125"
+        >
+          <FaLinkedin size={30} />
+        </a>
       </motion.div>
 
-      <footer className="footer">
-        <p>&copy; 2025 PSCMR CSE DS Hackathon | pscmrhackathon2k25@gmail.com</p>
-        <p>
-          Developed by <a href="https://thathadevilalithaportfolio.netlify.app/" target="_blank"><strong>T.DEVI LALITHA</strong></a> & <a href="https://seeram-portfolio.netlify.app/" target="_blank"><strong>Seeram Shanmukha</strong></a>
-        </p>
-      </footer>
+      {/* Footer */}
+      <footer className="bg-[#272757] w-full py-8 px-4 border-t-2 border-[#3e3e7d] shadow-md text-center text-[#d1c4f7]">
+  <div className="max-w-4xl mx-auto">
+    {/* Hackathon Info */}
+    <p className="text-sm sm:text-base mb-3">
+      &copy; 2025 <span className="font-semibold">PSCMR CSE DS Hackathon</span> | 
+      <a href="mailto:pscmrhackathon2k25@gmail.com" className="hover:underline ml-1">
+        pscmrhackathon2k25@gmail.com
+      </a>
+    </p>
+
+    {/* Developer Credits */}
+    <p className="text-sm sm:text-base text-white">
+      Developed by{" "}
+      <a
+        href="https://thathadevilalithaportfolio.netlify.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[#8686AC] hover:text-[#d1c4f7] font-bold transition-colors"
+      >
+        T. Devi Lalitha
+      </a>{" "}
+      &{" "}
+      <a
+        href="https://seeram-portfolio.netlify.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[#8686AC] hover:text-[#d1c4f7] font-bold transition-colors"
+      >
+        Seeram Shanmukha
+      </a>
+    </p>
+  </div>
+</footer>
+
+    </div>
     </div>
   );
 };

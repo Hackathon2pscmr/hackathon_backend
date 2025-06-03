@@ -32,7 +32,7 @@ const timelineData = [
 const Timeline = () => {
   return (
     <div className="timeline-container">
-      <h2 className="timeline-heading">📌 Timeline & Schedule</h2>
+      <h2 className="timeline-heading font-[Orbitron,sans-serif]">📌 Timeline & Schedule</h2>
       <div className="timeline">
         {timelineData.map((item, index) => (
           <div key={index} className="timeline-item">

@@ -4,5 +4,9 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
-  
+  extend: {
+      fontFamily: {
+        quortex: ['"Imperial Quortex"', 'sans-serif'],
+      },
+    },
 })

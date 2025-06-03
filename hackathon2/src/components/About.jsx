@@ -1,8 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaAward, FaNetworkWired, FaLaptopCode } from "react-icons/fa";
+import { FaLaptopCode, FaNetworkWired, FaAward, FaIdBadge } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import './About.css';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -52,69 +53,48 @@ const About = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1
-          className="text-4xl md:text-5xl font-bold tracking-wider text-storm"
-        >
-          About International Hackathon 2.0
+        <h1 className="text-2xl md:text-2xl text-[#d1c4f7] font-bold tracking-wider text-storm font-[Orbitron,sans-serif]">
+          About International Hackathon
         </h1>
-
+       
+        
       </motion.div>
 
       {/* College Info Section */}
-      {/* Top Section with Logo, Club Info, and Vision/Mission/Objective Cards */}
-      {/* Club & College Section Based on Sketch */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-10 mb-16">
-        {/* Club Logo with Anchor */}
-        <a
-          href="https://dev-innovationhubpscmr.pantheonsite.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-shrink-0 bg-white rounded-3xl border-[3px] border-[#505081] shadow-[10px_10px_0px_#393969] p-6 hover:shadow-[12px_12px_0px_#292850] transition duration-300"
-        >
-          <img
-            src="/clublog.jpg"
-            alt="Innovation Hub Logo"
-            className="w-[150px] h-[150px] object-contain"
-          />
-        </a>
+      <div className="flex flex-col items-center justify-center gap-6 mb-16 text-center">
+     
+        <p className=" font-medium text-3xl text-gray-300 mt-2">
+          In Association with Student Clubs
+        </p>
 
-        {/* Club + College Info with College Logo */}
-        <div className="flex flex-col md:flex-row items-center gap-6 flex-1 justify-between">
-          {/* Text Info */}
-          <div className="text-center md:text-left flex-1">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#eadeda] mb-2">
-              Innovation Hub Club
-            </h2>
-            <p className="text-gray-200 max-w-xl mx-auto md:mx-0 text-sm sm:text-base mb-4">
-              A student-led initiative that fosters creativity, innovation, and entrepreneurship at PSCMRCET
-              through hackathons, ideathons, and startup support activities.
-            </p>
+       
 
-            <h3 className="text-xl font-semibold text-[#eadeda] mb-1">
-              Potti Sriramulu Chalavadi Mallikarjuna Rao College of Engineering & Technology (PSCMRCET)
-            </h3>
-            <p className="text-gray-300 text-sm sm:text-base">
-              Established in 2008 and affiliated with JNTUK, PSCMR College offers premier engineering and
-              management education across disciplines, nurturing next-gen innovators.
-            </p>
-          </div>
-
-          {/* College Logo with Anchor */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-4">
           <a
-            href="https://pscmr.ac.in/"
+            href="https://dev-innovationhubpscmr.pantheonsite.io/"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white rounded-3xl border-[3px] border-[#505081] shadow-[10px_10px_0px_#393969] p-6 hover:shadow-[12px_12px_0px_#292850] transition duration-300"
           >
             <img
-              src="/pscmrlog.jpg"
-              alt="PSCMRCET Logo"
+              src="/clublog.jpg"
+              alt="Innovation Hub Logo"
+              className="w-[150px] h-[150px] object-contain"
+            />
+          </a>
+          <a
+            href="#"
+            rel="noopener noreferrer"
+            className="bg-white rounded-3xl border-[3px] border-[#505081] shadow-[10px_10px_0px_#393969] p-6 hover:shadow-[12px_12px_0px_#292850] transition duration-300"
+          >
+            <img
+              src="/auralogo.jpeg"
+              alt="AuraClub Logo"
               className="w-[150px] h-[150px] object-contain"
             />
           </a>
         </div>
       </div>
-
 
       {/* Vision, Mission, Objective Cards Section */}
       <div className="flex flex-wrap justify-center md:justify-between gap-8 mb-24">
@@ -138,28 +118,64 @@ const About = () => {
         ))}
       </div>
 
-
       {/* Benefits */}
-      <div className="mb-24">
-        <h2 className="text-3xl font-bold text-storm mb-10 text-center">Benefits of Participating</h2>
-        <div className="flex flex-wrap justify-center gap-8">
+      <div className="section-benefits">
+        <h2 className="heading-benefits">Benefits of Participating</h2>
+        <div className="cards-benefits-wrapper">
           {[
             { icon: <FaLaptopCode size={60} />, text: "Technical Skills" },
             { icon: <FaNetworkWired size={60} />, text: "Networking" },
             { icon: <FaAward size={60} />, text: "Exciting Prizes" },
-            { icon: <i className="fa fa-address-card text-[60px]" />, text: "Portfolio Boost" },
+            { icon: <FaIdBadge size={60} />, text: "Portfolio Boost" },
           ].map((item, idx) => (
-            <div key={idx} className="bg-twilight p-6 rounded-3xl w-[220px] sm:w-[250px] shadow-[8px_8px_0px_#505081] hover:-translate-y-2 hover:shadow-[12px_12px_0px_#393969] transition duration-300 flex flex-col items-center">
-              <div className="text-storm mb-4">{item.icon}</div>
-              <p className="text-lg font-semibold text-white text-center">{item.text}</p>
+            <div key={idx} className="card-benefit">
+              <div className="icon-benefit">{item.icon}</div>
+              <p className="text-benefit">{item.text}</p>
             </div>
           ))}
         </div>
       </div>
+<div className="w-full px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
+  <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16">
+    {/* Card 1 */}
+    <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-6 border-t-4 border-[#6f23bc]">
+      <h3 className="text-xl sm:text-2xl font-semibold text-[#442982] mb-4">
+        National / Offline Participation
+      </h3>
+      <ul className="list-disc pl-5 space-y-2 text-gray-700 text-left text-sm sm:text-base">
+        {/* list items */}
+        <li>Participants must be present at PSCMRCET, Vijayawada.</li>
+      <li>Basic infrastructure like internet & power will be provided.</li>
+      <li>Bring your own laptops, peripherals, and required tools.</li>
+      <li>ID and institutional proof is mandatory for entry.</li>
+      <li>Follow in-campus guidelines and event timings.</li>
+      <li>Food and accommodation info will be shared separately.</li>
+      <li>On-site technical support will be available.</li>
+      </ul>
+    </div>
+
+    {/* Card 2 */}
+    <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-6 border-t-4 border-[#6f23bc]">
+      <h3 className="text-xl sm:text-2xl font-semibold text-[#442982] mb-4">
+        International / Online Participation
+      </h3>
+      <ul className="list-disc pl-5 space-y-2 text-gray-700 text-left text-sm sm:text-base">
+        {/* list items */}
+        <li>Participate remotely with stable internet access.</li>
+      <li>Use communication tools like Zoom, Google Meet, etc.</li>
+      <li>Real-time tools like GitHub, Figma, Replit encouraged.</li>
+      <li>ID and institutional proof is mandatory for entry.</li>
+      <li>Team must be present for the live demo presentation.</li>
+      <li>Follow the same deadlines and judging criteria as offline teams.</li>
+      <li>Submit demo video, source code, and presentation deck on time.</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
       {/* Memories Carousel */}
       <div className="bg-[#1c1b2f] p-6 md:p-12 rounded-3xl border-[3px] border-[#505081] shadow-[0_8px_20px_rgba(0,0,0,0.4)] mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-10">
+        <h2 className="text-4xl md:text-3xl font-bold text-center text-[#d1c4f7] mb-10 font-[Orbitron,sans-serif]">
           Memories of Hackathon 1.0
         </h2>
 
@@ -189,9 +205,13 @@ const About = () => {
           <div className="w-full md:w-1/2 text-white text-lg leading-relaxed">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#eadeda]">Highlights from Hackathon 1.0</h3>
             <p className="mb-4">
-              Last year’s hackathon was an unforgettable celebration of innovation and collaboration. Students from all branches brought fresh, powerful ideas.
-              Judges and mentors were deeply impressed by the talent on display. It was more than a competition — it was a movement of ideas and action.
+              Hackathon 1.0, held on <strong>30–31 August 2024</strong>, was a national-level event that celebrated innovation, collaboration, and student ingenuity.
+              Participants from various branches presented powerful, creative solutions that left judges and mentors truly inspired.
+              It was more than a competition — it was a movement of ideas and action.
+              <br />
+              Building on that success, we are thrilled to announce that this year we’re going international — with a global platform for creativity, problem-solving, and cross-cultural collaboration.
             </p>
+
             <div className="flex justify-center md:justify-start">
               <button
                 onClick={() => window.open("https://pscmrhackathon2024.netlify.app/", "_blank")}

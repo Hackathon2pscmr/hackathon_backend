@@ -1,11 +1,11 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../auth';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminLogin = () => {
   const [form, setForm] = useState({ username: '', password: '' });
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = e => {
@@ -15,20 +15,54 @@ const AdminLogin = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if (login(form.username, form.password)) {
-      navigate('/admin/participants');
+      toast.success('Login successful!', {
+        position: "top-center",
+        autoClose: 2000
+      });
+      setTimeout(() => navigate('/admin/participants'), 2000);
     } else {
-      setError('Invalid credentials');
+      toast.error('Invalid credentials', {
+        position: "top-center",
+        autoClose: 2000
+      });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 p-6 bg-white shadow rounded text-black">
-      <h2 className="text-2xl font-bold mb-4">Admin Login</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      <input name="username" placeholder="Username" onChange={handleChange} className="w-full p-2 border rounded mb-2" />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} className="w-full p-2 border rounded mb-4" />
-      <button type="submit" className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-black">Login</button>
-    </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-sm bg-black bg-opacity-50 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-700"
+      >
+        <h2 className="text-3xl font-bold mb-6 text-center text-white">Admin Login</h2>
+
+        <input
+          name="username"
+          placeholder="Username"
+          value={form.username}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white placeholder-gray-400 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        />
+
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white placeholder-gray-400 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-cyan-600 font-semibold py-2 px-4 rounded-lg transition"
+        >
+          Login
+        </button>
+      </form>
+
+      <ToastContainer theme="dark" />
+    </div>
   );
 };
 

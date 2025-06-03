@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AliasSection.css';
 
 const faqs = [
@@ -18,10 +18,7 @@ const faqs = [
     "question": "What types of projects can we work on?",
     "answer": "You are encouraged to develop projects aligned with the hackathon's themes. Please refer to the specific challenge tracks for more details and inspiration."
   },
-  {
-    "question": "Do I need to have coding experience to participate?",
-    "answer": "While many projects involve coding, hackathons benefit from diverse skills. Designers, project managers, and subject matter experts are also valuable team members."
-  },
+ 
   {
     "question": "What resources will be provided during the hackathon?",
     "answer": "We will provide access to Wi-Fi, power outlets, and designated working spaces. Mentors will also be available to offer guidance and support."
@@ -64,10 +61,28 @@ const AliasSection = () => {
     "/images/sponsors2.jpg",
     "/images/sponsors3.jpg",
     "/images/sponsors4.jpg",
-    
+
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+ const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // ESC key functionality
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isModalOpen]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,66 +95,78 @@ const AliasSection = () => {
   return (
     <section className="alias-section">
       {/* PRIZES */}
-<div className="prizes-section">
-  <h2 className="prizes-title">Prizes</h2>
-  <p className="prizes-subtitle">
-    Exciting awards, e-certificates, and recognition await the top participants!
-  </p>
+      {/* PRIZES */}
+      <div className="prizes-section">
+        <h2 className="prizes-title">Prizes</h2>
+        <p className="prizes-subtitle">
+          Exciting awards, e-certificates, and recognition await the top participants!
+        </p>
 
-  <div className="prize-grid">
-    <div className="prize-card first-prize">
-      <img src="/images/prize1.png" alt="1st Prize" className="prize-img" />
-      <div className="prize-label">1st Prize</div>
-      <div className="prize-amount">₹40K</div>
+        <div className="prize-grid">
+          {[1, 2, 3, 4].map((index) => (
+            <div key={index} className={`prize-card ${index === 4 ? "special-prize" : ""}`}>
+              <img src={`/images/prize${index}.png`} alt={`Prize ${index}`} className="prize-img" />
+              <div className="prize-label">
+                {index === 1
+                  ? "1st Prize"
+                  : index === 2
+                    ? "2nd Prize"
+                    : index === 3
+                      ? "3rd Prize"
+                      : "Special Prize"}
+              </div>
+              <div className="prize-amount">
+                ₹{index === 1 ? "40K | $465" : index === 2 ? "30K | $350" : index === 3 ? "20K | $230" : "10K | $115"}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+
+      {/* RULES SECTION UPDATED */}
+     <div className="rules-section">
+      <h2 className="alias-title">Rules & Regulations</h2>
+      <div className="rules-button-container">
+        <button className="rules-button" onClick={() => setIsModalOpen(true)}>View</button>
+      </div>
+
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
+            <h3 className="modal-heading">International Hackathon 2k25</h3>
+            <div className="modal-body">
+              <iframe
+                src="/rules.pdf"
+                width="100%"
+                height="600px"
+                title="Rules PDF"
+                style={{ border: "none" }}
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-
-    <div className="prize-card second-prize">
-      <img src="/images/prize2.png" alt="2nd Prize" className="prize-img" />
-      <div className="prize-label">2nd Prize</div>
-      <div className="prize-amount">₹30K</div>
-    </div>
-
-    <div className="prize-card third-prize">
-      <img src="/images/prize3.png" alt="3rd Prize" className="prize-img" />
-      <div className="prize-label">3rd Prize</div>
-      <div className="prize-amount">₹20K</div>
-    </div>
-
-    <div className="prize-card special-prize">
-      <img src="/images/prize4.png" alt="Special Prize" className="prize-img" />
-      <div className="prize-label">Special Prize</div>
-      <div className="prize-amount">₹10K</div>
-    </div>
-  </div>
-</div>
-
-
-
-{/* RULES SECTION UPDATED */}
-<div className="rules-section">
-  <h2 className="alias-title">Rules & Regulations</h2>
-  <div className="rules-button-container">
-    <button className="rules-button">View</button>
-  </div>
-</div>
 
 
       {/* SPONSORS */}
-     <div className="sponsors-section">
-      <h2 className="alias-title">Our Sponsors</h2>
-      <div className="carousel-container">
-        {sponsors.map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt={`Sponsor ${index + 1}`}
-            className={`carousel-image ${
-              index === currentIndex ? "visible" : "hidden"
-            }`}
-          />
-        ))}
+      <div className="sponsors-section">
+        <h2 className="alias-title">Our Sponsors</h2>
+        <div className="carousel-container">
+          {sponsors.map((src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt={`Sponsor ${index + 1}`}
+              className={`carousel-image ${index === currentIndex ? "visible" : "hidden"
+                }`}
+            />
+          ))}
+        </div>
       </div>
-    </div>
 
       {/* RULES
       <div className="rules-section">
@@ -147,82 +174,121 @@ const AliasSection = () => {
         <button className="rules-button">View Rules PDF</button>
       </div> */}
 
-     {/* FAQs */}
-<div className="faq-section">
-  <h2 className="alias-title">FAQs</h2>
+      {/* FAQs */}
+      <div className="faq-section">
+        <h2 className="alias-title">FAQs</h2>
 
-  {/* grid wrapper */}
-  <div className="faq-grid">
-    {faqs.map((faq, index) => (
-      <div
-        className={`faq-card ${openFaq === index ? 'open' : ''}`}
-        key={index}
-        onClick={() => toggleFaq(index)}
-      >
-        <div className="faq-question">{faq.question}</div>
-        {openFaq === index && (
-          <div className="faq-answer">{faq.answer}</div>
-        )}
+        <div className="faq-grid">
+          {faqs.map((faq, index) => (
+            <div
+              className={`faq-card ${openFaq === index ? 'open' : ''}`}
+              key={index}
+              onClick={() => toggleFaq(index)}
+            >
+              <div className="faq-question flex justify-between items-center">
+                <span>{faq.question}</span>
+                <span className="faq-toggle-icon text-xl font-bold">
+                  {openFaq === index ? '−' : '+'}
+                </span>
+              </div>
+
+              {openFaq === index && (
+                <div className="faq-answer mt-2">{faq.answer}</div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
-
 
       {/* TEAM */}
-<div className="team-section">
- 
+      <div className="team-section px-4 py-10 bg-[#0B0B2A] text-white font-[Orbitron,sans-serif]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3">
+            {/* Chief Patrons */}
+            <div className="bg-[#151545] p-5 rounded-xl shadow-md border border-gray-700">
+              <h3 className="text-xl font-semibold mb-3 text-[#8686AC]">Chief Patrons</h3>
+              <ul className="space-y-3 text-sm leading-relaxed">
+                <li><strong>Sri Chalavadi Mallikarjuna Rao</strong><br />President</li>
+                <li><strong>Sri Potti Surendra Kumar</strong><br />Vice President</li>
+                <li><strong>Dr. Chitta Amar Sudheer</strong><br />Secretary & Correspondent</li>
+                <li><strong>Sri Grandhi Pavan Kumar</strong><br />Joint Secretary</li>
+                <li><strong>Sri Grandhi Raghu Sandeep</strong><br />Treasurer</li>
+              </ul>
+            </div>
 
-  <div className="team-grid">
-    <div className="team-column">
-      <h3 className="group-title">Chief Patrons</h3>
-      <ul>
-        <li><strong>Sri Chalavadi Mallikarjuna Rao</strong><br />President</li>
-        <li><strong>Sri Potti Surendra Kumar</strong><br />Vice President</li>
-        <li><strong>Dr. Chitta Amar Sudheer</strong><br />Secretary & Correspondent</li>
-        <li><strong>Sri Grandhi Pavan Kumar</strong><br />Joint Secretary</li>
-        <li><strong>Sri Grandhi Raghu Sandeep</strong><br />Treasurer</li>
-      </ul>
-    </div>
+            {/* Middle Column: Patrons, Conveners, Coordinators */}
+            <div className="space-y-6">
+              <div className="bg-[#151545] p-5 rounded-xl shadow-md border border-gray-700">
+                <h3 className="text-xl font-semibold mb-3 text-[#8686AC]">Patron</h3>
+                <ul className="space-y-3 text-sm">
+                  <li><strong>Dr. S. Saravana Kumar</strong><br />Principal</li>
+                </ul>
+              </div>
 
-    <div className="team-column">
-      <h3 className="group-title">Patron</h3>
-      <ul>
-        <li><strong>Dr. S. Saravana Kumar</strong><br />Principal</li>
-      </ul>
-    </div>
+              <div className="bg-[#151545] p-5 rounded-xl shadow-md border border-gray-700">
+                <h3 className="text-xl font-semibold mb-3 text-[#8686AC]">Conveners</h3>
+                <ul className="space-y-3 text-sm">
+                  <li><strong>Dr. SK. Akbar</strong><br />HOD, CSE-DS</li>
+                  <li><strong>V. Navya Sree</strong><br />HOD, CSE-AI&ML</li>
+                </ul>
+              </div>
 
-    <div className="team-column">
-      <h3 className="group-title">Conveners</h3>
-      <ul>
-        <li><strong>Dr. SK. Akbar</strong><br />HOD, CSE-DS</li>
-        <li><strong>V. Navya Sree</strong><br />HOD, CSE-AI&amp;ML</li>
-      </ul>
-    </div>
+              <div className="bg-[#151545] p-5 rounded-xl shadow-md border border-gray-700">
+                <h3 className="text-xl font-semibold mb-3 text-[#8686AC]">Coordinators</h3>
+                <ul className="space-y-3 text-sm">
+                  <li><strong>Dr. T. Srinivasa Reddy</strong></li>
+                  <li><strong>S. Tulasi Prasad</strong></li>
+                </ul>
+              </div>
+            </div>
 
-    <div className="team-column">
-      <h3 className="group-title">Coordinators</h3>
-      <ul>
-        <li><strong>Dr. T. Srinivasa Reddy</strong></li>
-        <li><strong>S. Tulasi Prasad</strong></li>
-      </ul>
-    </div>
-  </div>
+            {/* Student Coordinators */}
+            <div className="bg-[#151545] p-5 rounded-xl shadow-md border border-gray-700 w-full">
+              <h3 className="text-xl font-semibold mb-4 text-[#8686AC]">Student Coordinators</h3>
 
-  <h3 className="group-title">Student Coordinators</h3>
-  <div className="student-grid">
-    <ul>
-      <li><strong>R. Yamini</strong><br />9963957109</li>
-      <li><strong>V. Jagapathi Babu</strong><br />7989766326</li>
-      <li><strong>Anu Sri</strong><br />8019912927</li>
-      <li><strong>Meghnath</strong><br />8008165226</li>
-      <li><strong>V. Sai Sahith</strong><br />6305453161</li>
-      <li><strong>A. Viswa Satyendar</strong><br />7660959499</li>
-      <li><strong>P. Keerthana</strong><br />7075255742</li>
-      <li><strong>B. Sri Lekha</strong><br />9493845474</li>
-    </ul>
-  </div>
-</div>
+              <div className="space-y-4 text-sm sm:text-base">
+                <div>
+                  <p><strong>R. Yamini</strong></p>
+                  <p>9963957109</p>
+                </div>
+                <div>
+                  <p><strong>V. Jagapathi Babu</strong></p>
+                  <p>7989766326</p>
+                </div>
+                <div>
+                  <p><strong>Anu Sri</strong></p>
+                  <p>8019912927</p>
+                </div>
+                <div>
+                  <p><strong>Meghnath</strong></p>
+                  <p>8008165226</p>
+                </div>
+                <div>
+                  <p><strong>V. Sai Sahith</strong></p>
+                  <p>6305453161</p>
+                </div>
+                <div>
+                  <p><strong>A. Viswa Satyendar</strong></p>
+                  <p>7660959499</p>
+                </div>
+                <div>
+                  <p><strong>P. Keerthana</strong></p>
+                  <p>7075255742</p>
+                </div>
+                <div>
+                  <p><strong>B. Sri Lekha</strong></p>
+                  <p>9493845474</p>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
 
 
     </section>

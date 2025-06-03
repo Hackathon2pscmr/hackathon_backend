@@ -36,7 +36,7 @@ const trackList = [
 
 const Tracks = () => {
   return (
-    <section className="tracks-section">
+    <section className="tracks-section" id='tracks'>
       <h2 className="tracks-title">Tracks & Challenges</h2>
       <div className="track-grid">
         {trackList.map((track, index) => (

@@ -27,7 +27,7 @@ app.use('/api/registrations', registrationRoute);
 app.get('/', (req, res)=>{
   res.send({
     activeStatus:true,
-    error: false,
+   error: false,
   })
 });
 
